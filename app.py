@@ -16,6 +16,8 @@ app = Flask(__name__)
 
 app.config["SECRET_KEY"] = "a secret"
 app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://postgres:number13@localhost/rocket"
+# app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://postgres:number13:5432/rocket"
+
 
 bcrypt = Bcrypt()
 db.init_app(app)
