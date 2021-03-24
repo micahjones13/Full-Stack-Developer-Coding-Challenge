@@ -16,7 +16,7 @@ import os
 app = Flask(__name__)
 
 app.config["SECRET_KEY"] = "a secret"
-app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///db.db"
+app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///db.db1"
 # app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://postgres:number13:5432/rocket"
 
 
@@ -153,46 +153,46 @@ class Login(Resource):
 
 
 # already created db, don't need this anymore. Leaving it in so that we know that's how I did it.
-# with app.app_context():
-#     db.create_all()
-#     contacts = json.load(open("./contacts.json"))
-#     alerts = json.load(open("./alerts.json"))
-#     for i in contacts:
-#         contact = ContactsModel(
-#             _id=i["_id"],
-#             contactId=i["contactId"],
-#             contactStatus=i["contactStatus"],
-#             contactName=i["contactName"],
-#             contactGround=i["contactGround"],
-#             contactSatellite=i["contactSatellite"],
-#             contactEquipment=i["contactEquipment"],
-#             contactState=i["contactState"],
-#             contactStep=i["contactStep"],
-#             contactDetail=i["contactDetail"],
-#             contactBeginTimestamp=i["contactBeginTimestamp"],
-#             contactEndTimestamp=i["contactEndTimestamp"],
-#             contactLatitude=i["contactLatitude"],
-#             contactLongitude=i["contactLongitude"],
-#             contactAzimuth=i["contactAzimuth"],
-#             contactElevation=i["contactElevation"],
-#             contactResolution=i["contactResolution"],
-#             contactResolutionStatus=i["contactResolutionStatus"]
-#         )
-#         db.session.add(contact)
-#     for j in alerts:
-#         alert = AlertsModel(
-#             errorId=j["errorId"],
-#             errorSeverity=j["errorSeverity"],
-#             errorCategory=j["errorCategory"],
-#             errorMessage=j["errorMessage"],
-#             longMessage=j["longMessage"],
-#             errorTime=j["errorTime"],
-#             selected=j["selected"],
-#             new=j["new"],
-#             expanded=j["expanded"],
-#         )
-#         db.session.add(alert)
-#     db.session.commit()
+with app.app_context():
+    db.create_all()
+    contacts = json.load(open("./contacts.json"))
+    alerts = json.load(open("./alerts.json"))
+    for i in contacts:
+        contact = ContactsModel(
+            _id=i["_id"],
+            contactId=i["contactId"],
+            contactStatus=i["contactStatus"],
+            contactName=i["contactName"],
+            contactGround=i["contactGround"],
+            contactSatellite=i["contactSatellite"],
+            contactEquipment=i["contactEquipment"],
+            contactState=i["contactState"],
+            contactStep=i["contactStep"],
+            contactDetail=i["contactDetail"],
+            contactBeginTimestamp=i["contactBeginTimestamp"],
+            contactEndTimestamp=i["contactEndTimestamp"],
+            contactLatitude=i["contactLatitude"],
+            contactLongitude=i["contactLongitude"],
+            contactAzimuth=i["contactAzimuth"],
+            contactElevation=i["contactElevation"],
+            contactResolution=i["contactResolution"],
+            contactResolutionStatus=i["contactResolutionStatus"]
+        )
+        db.session.add(contact)
+    for j in alerts:
+        alert = AlertsModel(
+            errorId=j["errorId"],
+            errorSeverity=j["errorSeverity"],
+            errorCategory=j["errorCategory"],
+            errorMessage=j["errorMessage"],
+            longMessage=j["longMessage"],
+            errorTime=j["errorTime"],
+            selected=j["selected"],
+            new=j["new"],
+            expanded=j["expanded"],
+        )
+        db.session.add(alert)
+    db.session.commit()
 # adding resources to api
 api.add_resource(Alerts, "/alerts")
 api.add_resource(Contacts, "/contacts")
