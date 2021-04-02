@@ -32,7 +32,7 @@ class Alerts(db.Model):
     expanded = db.Column(db.Boolean())
 
     def __repr__(self):
-        return self.__dict__
+        return f"{self.errorId}"
 
 
 class Contacts(db.Model):
@@ -60,4 +60,4 @@ class Contacts(db.Model):
     contactResolutionStatus = db.Column(db.String(28))
 
     def __repr__(self):
-        return self.__dict__
+        return f"\n{self.id}, {self._id}, {self.contactId}"
